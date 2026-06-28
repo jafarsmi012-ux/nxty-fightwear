@@ -1,10 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { Search, ShoppingCart, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Search, ShoppingCart, Menu, X, User, LogOut, Package, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useUI } from "@/contexts/UIContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getCurrentUser, signOut, onAuthStateChange } from "@/lib/supabase/customer";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -22,9 +24,31 @@ const MARQUEE_ITEMS = [
 export default function Navbar({ onSearch }: NavbarProps) {
   const { totalItems } = useCart();
   const { openCart } = useUI();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    getCurrentUser().then((u) => {
+      if (mounted) setUser(u);
+    });
+    const subscription = onAuthStateChange((u) => setUser(u));
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setUser(null);
+    setUserMenuOpen(false);
+    router.push("/");
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,6 +130,72 @@ export default function Navbar({ onSearch }: NavbarProps) {
           >
             {searchOpen ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
           </button>
+
+          {/* User button */}
+          <div className="relative">
+            <button
+              className="w-10 h-10 border-2 border-[#262626] border-l-0 flex items-center justify-center hover:bg-[#dc2626] hover:border-[#dc2626] transition-colors"
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              aria-label="Akun"
+              aria-expanded={userMenuOpen}
+            >
+              <User className="w-4 h-4" />
+            </button>
+            {userMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setUserMenuOpen(false)}
+                />
+                <div className="absolute right-0 top-full mt-2 w-56 bg-[#0a0a0a] border-2 border-[#dc2626] z-50 shadow-[4px_4px_0_#dc2626]">
+                  {user ? (
+                    <>
+                      <div className="px-3 py-2 border-b border-[#262626]">
+                        <p className="text-[10px] font-black uppercase tracking-wider text-neutral-500">Login sebagai</p>
+                        <p className="text-xs font-bold text-white truncate">{user.email}</p>
+                      </div>
+                      <Link
+                        href="/akun"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#dc2626]"
+                      >
+                        <User className="w-3.5 h-3.5" /> Akun Saya
+                      </Link>
+                      <Link
+                        href="/akun/pesanan"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#dc2626]"
+                      >
+                        <Package className="w-3.5 h-3.5" /> Pesanan Saya
+                      </Link>
+                      <Link
+                        href="/akun/alamat"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#dc2626]"
+                      >
+                        <MapPin className="w-3.5 h-3.5" /> Alamat Saya
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="flex items-center gap-2 px-3 py-2.5 text-xs font-black uppercase tracking-wider text-[#dc2626] hover:bg-[#dc2626] hover:text-white w-full text-left border-t border-[#262626]"
+                      >
+                        <LogOut className="w-3.5 h-3.5" /> Logout
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      href="/masuk"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-3 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-[#dc2626]"
+                    >
+                      <User className="w-3.5 h-3.5" /> Masuk
+                    </Link>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+
           <button
             className="w-10 h-10 border-2 border-[#262626] border-l-0 flex items-center justify-center relative hover:bg-[#dc2626] hover:border-[#dc2626] transition-colors"
             onClick={openCart}

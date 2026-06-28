@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "fermentId": "019eef18-1749-708f-bfd5-9f60890cbac0",
+  "phaseId": "phase-1",
+  "phaseName": "Phase 1: Project Setup & Data",
+  "attempt": 1,
+  "timestamp": "2026-06-22T14:11:26.154Z",
+  "goal": "Project scaffolded, deps terinstall, data JSON & types siap",
+  "summary": "Phase 1: Project Setup & Data selesai. Next.js 16.2.9 dengan App Router, TypeScript, dan Tailwind CSS v4 berhasil diinisialisasi. Dependencies terinstall (midtrans-client, lucide-react, clsx, tailwind-merge). Struktur folder lengkap dibuat. Data produk JSON berisi 24 produk realistis di 9 kategori. Type definitions (Product, CartItem, Customer, MidtransItem, MidtransCustomer, PaymentStatus) tersedia. next.config.ts dikonfigurasi untuk deploy Vercel dengan remotePatterns gambar.",
+  "stepSummaries": "  1. Inisialisasi Next.js 14+ dengan App Router, TypeScript, dan Tailwind CSS (npx create-next-app) [verified]\n  2. Install dependencies: midtrans-client, lucide-react, clsx, tailwind-merge [verified]\n  3. Buat struktur folder: app/(routing), components/(UI), lib/(utils), data/(products.json), types/(index.ts), contexts/(cart) [verified]\n  4. Buat data/products.json dengan ≥20 produk realistis di 9 kategori [verified]\n  5. Buat types/index.ts untuk Product, CartItem, Customer, Order [verified]\n  6. Setup next.config.js untuk deploy-ready (trailingSlash opsional, output auto untuk Vercel) [verified]",
+  "diffAvailable": false,
+  "flags": [],
+  "derivedGrade": "A",
+  "reviewerRationale": "All gates pass; project checks validate.",
+  "gateVerdicts": [
+    {
+      "id": "F1",
+      "verdict": "pass",
+      "rationale": "Semua 6 steps dalam Phase 1 lulus verifikasi real: Step 1 (create-next-app) verifikasi PASSED via test -f package.json dan grep next. Step 2 (npm install) verifikasi PASSED via grep semua package. Step 3 (mkdir) verifikasi PASSED via test -d semua folder. Step 4 (products.json) verifikasi PASSED via node parse, 24 produk ≥20. Step 5 (types) verifikasi PASSED via test -f dan grep interfaces. Step 6 (config) verifikasi PASSED via test -f next.config.ts. Tidak ada proxy verification.",
+      "evidence": "Step 1: PASSED (package.json ada next). Step 2: PASSED (midtrans-client, lucide-react, clsx, tailwind-merge di package.json). Step 3: PASSED (app/api/midtrans, components, lib, data, types, contexts). Step 4: PASSED (24 produk via node). Step 5: PASSED (types/index.ts ada). Step 6: PASSED (next.config.ts ada)."
+    },
+    {
+      "id": "F2",
+      "verdict": "pass",
+      "rationale": "Output Phase 1 (project scaffold, deps, folder, data JSON, types, config) menjadi input yang lengkap untuk Phase 2 (Core UI Components). Semua file yang dibutuhkan komponen UI ada: package.json (deps), data/products.json (konten), types/index.ts (tipe data), next.config.ts (config gambar). Phase goal \"Project scaffolded, deps terinstall, data JSON & types siap\" tercapai.",
+      "evidence": "File kritis ready: data/products.json (24 produk), types/index.ts (interfaces), next.config.ts (deploy config), node_modules/ (deps), app/ (struktur routing), components/ (folder kosong siap diisi)."
+    },
+    {
+      "id": "F3",
+      "verdict": "pass",
+      "rationale": "Tidak ada yang didefer. Semua 6 steps selesai dalam Phase 1. Tidak ada dependensi yang tertunda.",
+      "evidence": "n/a"
+    }
+  ],
+  "projectChecks": {
+    "discovered": true,
+    "anyFailed": false,
+    "commands": [
+      {
+        "kind": "lint",
+        "command": "npm run lint",
+        "exitCode": 0,
+        "durationMs": 0,
+        "timedOut": false
+      }
+    ]
+  }
+}

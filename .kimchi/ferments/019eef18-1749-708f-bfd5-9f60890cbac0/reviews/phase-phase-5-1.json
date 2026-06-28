@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "fermentId": "019eef18-1749-708f-bfd5-9f60890cbac0",
+  "phaseId": "phase-5",
+  "phaseName": "Phase 5: Static Pages & SEO",
+  "attempt": 1,
+  "timestamp": "2026-06-22T15:11:15.657Z",
+  "goal": "Semua halaman statis tersedia, metadata SEO lengkap, .env.example ada",
+  "summary": "Phase 5: Static Pages & SEO selesai. app/cara-order/page.tsx panduan 5 langkah. app/kontak/page.tsx info kontak. app/tentang-kami/page.tsx cerita brand. Metadata SEO + Open Graph di layout.tsx. .env.example tersedia. app/robots.txt dan app/icon.svg dibuat.",
+  "stepSummaries": "  1. Buat app/cara-order/page.tsx dengan panduan belanja step-by-step [verified]\n  2. Buat app/kontak/page.tsx dengan informasi kontak brand [verified]\n  3. Buat app/tentang-kami/page.tsx dengan cerita brand NXTY Fightwear [verified]\n  4. Tambah metadata title, description, Open Graph (og:title, og:description, og:image) di app/layout.tsx dan halaman kunci [verified]\n  5. Buat .env.example dengan MIDTRANS_SERVER_KEY, NEXT_PUBLIC_MIDTRANS_CLIENT_KEY, NEXT_PUBLIC_APP_URL tanpa nilai hardcoded [verified]\n  6. Buat app/favicon.ico atau app/icon.tsx dan app/robots.txt [verified]",
+  "diffAvailable": false,
+  "flags": [],
+  "derivedGrade": "A",
+  "reviewerRationale": "All gates pass; project checks validate.",
+  "gateVerdicts": [
+    {
+      "id": "F1",
+      "verdict": "pass",
+      "rationale": "Semua 6 steps dalam Phase 5 terverifikasi real. Step 1 (cara-order): test -f + grep cara: PASSED. Step 2 (kontak): test -f + grep email: PASSED. Step 3 (tentang-kami): test -f + grep NXTY: PASSED. Step 4 (metadata OG): grep openGraph && metadata: PASSED. Step 5 (.env.example): test -f + grep MIDTRANS_SERVER_KEY + NEXT_PUBLIC_MIDTRANS_CLIENT_KEY: PASSED. Step 6 (robots+icon): test -f robots.txt && test -f icon.svg: PASSED.",
+      "evidence": "Semua 6 steps PASSED verification."
+    },
+    {
+      "id": "F2",
+      "verdict": "pass",
+      "rationale": "Output Phase 5 (static pages, SEO metadata, env template, robots/icon) menjadi final polish sebelum Phase 6 build. Semua halaman statis tersedia. Metadata OG di root layout. .env.example sebagai dokumentasi. Phase goal \"Semua halaman statis tersedia, metadata SEO lengkap, .env.example ada\" tercapai.",
+      "evidence": "Halaman statis: cara-order, kontak, tentang-kami. Metadata: title, description, openGraph, twitter, robots. .env.example: MIDTRANS_SERVER_KEY, NEXT_PUBLIC_MIDTRANS_CLIENT_KEY, NEXT_PUBLIC_APP_URL."
+    },
+    {
+      "id": "F3",
+      "verdict": "pass",
+      "rationale": "Tidak ada yang didefer. Semua steps selesai. SEO basic sudah mencukupi MVP. Jika ingin metadata dinamis per halaman detail produk, hal itu bisa jadi enhancement post-MVP.",
+      "evidence": "n/a"
+    }
+  ],
+  "projectChecks": {
+    "discovered": true,
+    "anyFailed": false,
+    "commands": [
+      {
+        "kind": "lint",
+        "command": "npm run lint",
+        "exitCode": 0,
+        "durationMs": 1,
+        "timedOut": false
+      }
+    ]
+  }
+}

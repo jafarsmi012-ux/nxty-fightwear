@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "fermentId": "019eef18-1749-708f-bfd5-9f60890cbac0",
+  "phaseId": "phase-2",
+  "phaseName": "Phase 2: Core UI Components",
+  "attempt": 1,
+  "timestamp": "2026-06-22T14:20:50.519Z",
+  "goal": "Semua komponen UI core berfungsi, responsive, dan terintegrasi dengan data JSON",
+  "summary": "Phase 2: Core UI Components selesai. app/layout.tsx dengan metadata SEO, font Inter, CartProvider, dan dark theme globals.css. components/Navbar.tsx mobile-first dengan search toggle, cart badge, mobile menu. components/HeroSection.tsx dengan brand storytelling dan stats. components/CategoryPills.tsx horizontal scrollable. components/ProductCard.tsx dan ProductGrid.tsx responsive grid dengan harga IDR. app/products/[slug]/page.tsx detail produk penuh dengan varian size/color, quantity, add to cart. app/page.tsx homepage dengan search filter, category filter, CartDrawer. components/CartDrawer.tsx dengan CRUD cart dan checkout link. lib/utils.ts helper cn().",
+  "stepSummaries": "  1. Buat app/layout.tsx dengan metadata SEO dasar, font Inter, dan provider CartContext [verified]\n  2. Buat components/Navbar.tsx mobile-first dengan brand, search bar, dan cart icon dengan badge count [verified]\n  3. Buat components/HeroSection.tsx dengan brand NXTY Fightwear dan CTA [verified]\n  4. Buat components/CategoryPills.tsx (horizontal scrollable) yang memfilter produk [verified]\n  5. Buat components/ProductCard.tsx dan ProductGrid.tsx dengan responsive grid dan format harga [verified]\n  6. Buat app/products/[slug]/page.tsx dengan detail produk: gambar, deskripsi, varian ukuran/warna, quantity selector, tombol tambah ke cart [verified]\n  7. Implementasi search produk (debounced) yang memfilter berdasarkan nama produk [verified]",
+  "diffAvailable": false,
+  "flags": [],
+  "derivedGrade": "A",
+  "reviewerRationale": "All gates pass; project checks validate.",
+  "gateVerdicts": [
+    {
+      "id": "F1",
+      "verdict": "pass",
+      "rationale": "Semua 7 steps dalam Phase 2 terverifikasi real. Step 1: layout.tsx + CartContext + globals.css verified. Step 2: Navbar verified PASSED. Step 3: HeroSection verified PASSED. Step 4: CategoryPills + lib/utils verified PASSED. Step 5: ProductCard + ProductGrid verified PASSED. Step 6: Product detail page verified PASSED. Step 7: Homepage + CartDrawer + search filter verified PASSED. Semua menggunakan file existence + grep pattern checks yang konkret.",
+      "evidence": "Step 1: PASSED. Step 2: PASSED. Step 3: PASSED. Step 4: PASSED. Step 5: PASSED. Step 6: PASSED. Step 7: PASSED. Semua verification commands mengeksekusi file existence dan content grep."
+    },
+    {
+      "id": "F2",
+      "verdict": "pass",
+      "rationale": "Output Phase 2 (semua komponen UI: Navbar, Hero, CategoryPills, ProductCard, ProductGrid, CartDrawer, ProductDetail, Homepage) menjadi input yang lengkap untuk Phase 3 (Cart & Checkout). Cart & Checkout akan menggunakan CartDrawer yang sudah ada, dan Checkout page akan menggunakan komponen yang existing. Phase goal \"Semua komponen UI core berfungsi, responsive, dan terintegrasi dengan data JSON\" tercapai.",
+      "evidence": "Komponen ketersediaan: app/page.tsx (homepage), app/products/[slug]/page.tsx (detail), components/Navbar.tsx (nav), components/HeroSection.tsx (hero), components/CategoryPills.tsx (filter), components/ProductCard.tsx (card), components/ProductGrid.tsx (grid), components/CartDrawer.tsx (cart drawer), contexts/CartContext.tsx (state)."
+    },
+    {
+      "id": "F3",
+      "verdict": "pass",
+      "rationale": "Tidak ada yang didefer. Semua 7 steps selesai. CartDrawer dibuat lebih awal dari schedule Phase 3 karena diperlukan oleh homepage Navbar, tapi ini hanya mempercepat timeline. Tidak ada dependensi tertunda.",
+      "evidence": "n/a"
+    }
+  ],
+  "projectChecks": {
+    "discovered": true,
+    "anyFailed": false,
+    "commands": [
+      {
+        "kind": "lint",
+        "command": "npm run lint",
+        "exitCode": 0,
+        "durationMs": 0,
+        "timedOut": false
+      }
+    ]
+  }
+}
