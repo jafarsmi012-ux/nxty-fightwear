@@ -1,12 +1,15 @@
 "use client";
 
 import { Search, ShoppingCart, Menu, X, User, LogOut, Package, MapPin } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useUI } from "@/contexts/UIContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getCurrentUser, signOut, onAuthStateChange } from "@/lib/supabase/customer";
+import productsData from "@/data/products.json";
+import SearchSuggestions from "./SearchSuggestions";
+import type { Product } from "@/types";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -28,6 +31,8 @@ export default function Navbar({ onSearch }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
+  const [isSuggestionOpen, setIsSuggestionOpen] = useState(false);
   const [user, setUser] = useState<{ email?: string } | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -53,7 +58,56 @@ export default function Navbar({ onSearch }: NavbarProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query.trim());
+    setIsSuggestionOpen(false);
   };
+
+  // Search products fuzzy match
+  const searchProducts = useCallback((searchQuery: string): Product[] => {
+    if (!searchQuery.trim()) return [];
+
+    const q = searchQuery.toLowerCase();
+    return productsData.products
+      .filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q)
+      )
+      .slice(0, 6);
+  }, []);
+
+  // Debounced search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const results = searchProducts(query);
+      setSuggestions(results);
+      setIsSuggestionOpen(results.length > 0);
+    }, 250);
+
+    return () => clearTimeout(timer);
+  }, [query, searchProducts]);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!isSuggestionOpen) return;
+      const target = event.target as HTMLElement;
+      // Don't close if clicking on search input or search open button
+      if (
+        target.closest("input") ||
+        target.closest('[aria-label="Cari"]')
+      ) {
+        return;
+      }
+      setIsSuggestionOpen(false);
+    };
+
+    if (isSuggestionOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isSuggestionOpen]);
 
   const navLinks = [
     { href: "/", label: "BERANDA" },
@@ -213,7 +267,7 @@ export default function Navbar({ onSearch }: NavbarProps) {
 
       {/* Search bar */}
       {searchOpen && (
-        <div className="border-b-2 border-[#dc2626] px-3 sm:px-4 py-3 bg-[#0a0a0a]">
+        <div className="border-b-2 border-[#dc2626] px-3 sm:px-4 py-3 bg-[#0a0a0a] relative">
           <form onSubmit={handleSearch} className="max-w-3xl mx-auto relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-black uppercase tracking-[0.2em] text-[#dc2626] border-r-2 border-[#262626] pr-2">
               CARI
@@ -230,6 +284,18 @@ export default function Navbar({ onSearch }: NavbarProps) {
               className="w-full bg-[#0a0a0a] text-white text-sm font-bold uppercase tracking-wider pl-20 pr-4 py-3 border-2 border-[#262626] focus:border-[#dc2626] focus:outline-none placeholder:text-neutral-700"
             />
           </form>
+          {/* Search Suggestions */}
+          <SearchSuggestions
+            suggestions={suggestions.map((p) => ({
+              id: p.id,
+              name: p.name,
+              slug: p.slug,
+              category: p.category,
+              image: p.images[0],
+            }))}
+            onClose={() => setIsSuggestionOpen(false)}
+            isOpen={isSuggestionOpen}
+          />
         </div>
       )}
 
