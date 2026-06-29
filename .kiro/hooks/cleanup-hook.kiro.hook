@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Cleanup Hook",
+  "description": "Remove cart hook",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ""
+  }
+}

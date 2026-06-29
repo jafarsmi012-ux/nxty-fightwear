@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Create Cart Page Hook",
+  "description": "Create a cart page that displays cart items with update/delete functionality",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": ""
+  }
+}

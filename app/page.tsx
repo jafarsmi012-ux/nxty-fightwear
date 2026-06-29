@@ -157,10 +157,10 @@ export default function Home() {
             </div>
             <div className="text-center sm:text-right">
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-500 font-mono">
-                LAHIR UNTUK BERTEMPUR · DIBUAT TAHAN LAMA
+                LAHIR UNTUK BERTEMPUR · DIBUAT TAHAN LAMA · ANXIETY FIGHTWEAR
               </p>
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-700 mt-1">
-                © 2024 NXTY · ALL RIGHTS RESERVED
+                © 2024 ANXIETY FIGHTWEAR · ALL RIGHTS RESERVED
               </p>
             </div>
           </div>

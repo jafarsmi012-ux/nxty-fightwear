@@ -27,7 +27,7 @@ export default function KontakPage() {
             </div>
             <div>
               <p className="text-xs text-neutral-500 mb-0.5">email</p>
-              <p className="text-sm font-medium text-white">support@nxtyfightwear.id</p>
+              <p className="text-sm font-medium text-white">anxietyfightwear@gmail.com</p>
             </div>
           </div>
 

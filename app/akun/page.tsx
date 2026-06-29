@@ -39,7 +39,7 @@ export default async function AkunProfilePage() {
         Profil Saya
       </h1>
       <p className="text-sm text-neutral-400 mb-6">
-        Kelola informasi akun Anda
+        Kelola informasi akun Anda di Anxiety Fightwear
       </p>
 
       <ProfileForm

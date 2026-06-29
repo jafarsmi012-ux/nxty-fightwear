@@ -9,11 +9,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NXTY Fightwear — Peralatan Olahraga & Fightwear",
+  title: "Anxiety Fightwear — Peralatan Olahraga & Fightwear",
   description:
-    "Toko online NXTY Fightwear. Jual boxing gloves, hand wrap, rashguard, fight shorts, shin guard, dan apparel olahraga berkualitas dengan harga terjangkau.",
+    "Anxiety Fightwear adalah brand peralatan olahraga beladiri asal Bandung yang berdiri sejak tahun 2014. Seluruh produk diproduksi di pabrik milik kami sendiri sehingga kualitas tetap terjaga dengan harga yang kompetitif.",
   keywords: [
-    "NXTY Fightwear",
+    "Anxiety Fightwear",
     "boxing gloves",
     "hand wrap",
     "rashguard",
@@ -26,18 +26,18 @@ export const metadata: Metadata = {
     "toko online",
     "UMKM",
   ],
-  authors: [{ name: "NXTY Fightwear" }],
+  authors: [{ name: "Anxiety Fightwear" }],
   openGraph: {
-    title: "NXTY Fightwear — Peralatan Olahraga & Fightwear",
+    title: "Anxiety Fightwear — Peralatan Olahraga & Fightwear",
     description:
       "Temukan perlengkapan latihan terbaik. Boxing gloves, rashguard, fight shorts, dan banyak lagi.",
     type: "website",
     locale: "id_ID",
-    siteName: "NXTY Fightwear",
+    siteName: "Anxiety Fightwear",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NXTY Fightwear",
+    title: "Anxiety Fightwear",
     description: "Peralatan Olahraga & Fightwear Berkualitas",
   },
   robots: "index, follow",

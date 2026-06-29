@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Remove Cart Hook",
+  "description": "Remove cart page hook",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ""
+  }
+}

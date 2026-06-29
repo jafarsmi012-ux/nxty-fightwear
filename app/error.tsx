@@ -123,7 +123,7 @@ export default function Error({ error, reset }: ErrorProps) {
           {/* Extra Info */}
           <div className="pt-8 border-t-4 border-[#dc2626]">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 font-mono">
-              Jika masalah berlanjut, silakan hubungi kami di hello@nxtyfightwear.com
+              Jika masalah berlanjut, silakan hubungi kami di anxietyfightwear@gmail.com
             </p>
           </div>
         </div>
@@ -143,10 +143,10 @@ export default function Error({ error, reset }: ErrorProps) {
             </div>
             <div className="text-center sm:text-right">
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 font-mono">
-                LAHIR UNTUK BERTEMPUR · DIBUAT TAHAN LAMA
+                LAHIR UNTUK BERTEMPUR · DIBUAT TAHAN LAMA · ANXIETY FIGHTWEAR
               </p>
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-800 mt-1">
-                © 2024 NXTY · ALL RIGHTS RESERVED
+                © 2024 ANXIETY FIGHTWEAR · ALL RIGHTS RESERVED
               </p>
             </div>
           </div>
